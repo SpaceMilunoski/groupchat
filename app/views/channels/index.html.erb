@@ -1,27 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Channels</h1>
+<section class="section">
+    <div class="container">
+      <h1 class="title">Channels</h1>
+    </div>
+  </section>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="columns is-multiline">
+  <div class="column is-full">
+    <%= link_to 'New Channel', new_channel_path, class: 'button is-link is-small is-pulled-right' %>
+  </div>
+  <div class="column is-full">
+    <table class="table is-bordered is-striped" style='width: 100%';> 
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @channels.each do |channel| %>
-      <tr>
-        <td><%= channel.name %></td>
-        <td><%= link_to 'Show', channel %></td>
-        <td><%= link_to 'Edit', edit_channel_path(channel) %></td>
-        <td><%= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Channel', new_channel_path %>
+      <tbody>
+        <% @channels.each do |channel| %>
+          <tr>
+            <td><%= channel.name %></td>
+            <td><%= link_to 'Show', channel %></td>
+            <td><%= link_to 'Edit', edit_channel_path(channel) %></td>
+            <td><%= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

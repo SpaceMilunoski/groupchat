@@ -1,9 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @channel.name %>
-</p>
+<section class="section">
+  <div class="container">
+    <h1 class="title"><%= @channel.name %></h1>
+  </div>
+</section>
 
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Back', channels_path %>
+<div class="columns">
+  <div class="column is-one-quarter">
+    <div>
+      <h6 class="title is-6">Channels</h6>
+    </div>
+    <% Channel.all.each do |channel| %>
+      <div>
+        <%= link_to channel.name, channel_path(channel) %>
+        current_user.channels.include?(channel)
+        <% if true %>
+          <%= link_to '' do%>
+          <i class="fas fa-times" ></i>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <hr/>
+    <div>
+      <h6 class="title is-6">User</h6>
+    </div>
+    <% @channel.users.each do |user| %>
+      <div>
+        <%=user.name%>
+      </div>
+    <% end %>
+  </div>
+  <div class="column is-three-quarters">
+    current_user.channels.include?(@channel)
+    <% if false %>
+    <% else %>
+      <%= link_to "Join #{@channel.name}", ''%>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_channel_path(@channel), class: 'button is-primary is-light is-small' %> |
+<%= link_to 'Back', channels_path, class: 'button is-link is-light is-small' %>
