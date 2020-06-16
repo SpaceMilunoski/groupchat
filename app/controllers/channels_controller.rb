@@ -1,10 +1,11 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
+  before_action :set_channels, only: [:index, :show]
+  before_action :authenticate_user!, only: [:show]
 
   # GET /channels
   # GET /channels.json
   def index
-    @channels = Channel.all
   end
 
   # GET /channels/1
@@ -65,6 +66,10 @@ class ChannelsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_channel
       @channel = Channel.find(params[:id])
+    end
+
+    def set_channels
+      @channels = Channel.all
     end
 
     # Only allow a list of trusted parameters through.

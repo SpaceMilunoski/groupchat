@@ -11,13 +11,13 @@
     <div>
       <h6 class="title is-6">Channels</h6>
     </div>
-    <% Channel.all.each do |channel| %>
+    <% @channels.each do |channel| %>
       <div>
         <%= link_to channel.name, channel_path(channel) %>
-        current_user.channels.include?(channel)
-        <% if true %>
-          <%= link_to '' do%>
-          <i class="fas fa-times" ></i>
+        <% if current_user.channels.include?(channel) %>
+          <%= link_to channel_channel_user_path(channel),
+              method: :delete do%>
+            <i class="fas fa-times" ></i>
           <% end %>
         <% end %>
       </div>
@@ -28,18 +28,23 @@
     </div>
     <% @channel.users.each do |user| %>
       <div>
-        <%=user.name%>
+        <%=user.email%>
       </div>
     <% end %>
   </div>
   <div class="column is-three-quarters">
-    current_user.channels.include?(@channel)
-    <% if false %>
+    <% if current_user.channels.include?(@channel) %>
     <% else %>
-      <%= link_to "Join #{@channel.name}", ''%>
+      <%= link_to "Join #{@channel.name}",
+          channel_channel_user_path(@channel),
+          method: :post%>
     <% end %>
   </div>
 </div>
 
-<%= link_to 'Edit', edit_channel_path(@channel), class: 'button is-primary is-light is-small' %> |
-<%= link_to 'Back', channels_path, class: 'button is-link is-light is-small' %>
+<%= link_to 'Edit',
+    edit_channel_path(@channel),
+    class: 'button is-primary is-light is-small' %> |
+<%= link_to 'Back',
+    channels_path,
+    class: 'button is-link is-light is-small' %>

@@ -15,12 +15,19 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary is-small">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light is-small">
-            Log in
-          </a>
+          <% if current_user.nil? %>
+            <%= link_to raw('<strong>Sign up</strong>'), 
+              new_user_registration_path,
+              class: 'button is-primary is-small'%>
+            <%= link_to 'Log in',
+                new_user_session_path,
+                class: 'button is-light is-small'%>
+          <% else %>
+            <%= link_to raw('<strong>Log out</strong>'), 
+              destroy_user_session_path,
+              class: 'button is-primary is-small',
+              method: :delete%>
+          <% end %>
         </div>
       </div>
     </div>
